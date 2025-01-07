@@ -1,6 +1,5 @@
 {% set name = "gnupg" %}
 {% set version = "2.3.1" %}
-{% set sha256 = "8db5a05c369dbc231dab4c98515ce828f2dffdc14f1534441a6c59b71c6d2031" %}
 
 package:
   # This name is chosen as there is already a python-gnupg (that is similar but not the same).
@@ -8,18 +7,18 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 8db5a05c369dbc231dab4c98515ce828f2dffdc14f1534441a6c59b71c6d2031
 
 build:
   number: 1
   noarch: python
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - python {{ python_min }}
+    - setuptools
     - pip
   run:
     - python >={{ python_min }}
